@@ -5,8 +5,19 @@
       <map>
         <entry key="..\:/Users/eLoving/AndroidStudioProjects/QuizGame/app/src/main/res/drawable/bg.xml" value="0.1945" />
         <entry key="..\:/Users/eLoving/AndroidStudioProjects/QuizGame/app/src/main/res/drawable/flag.xml" value="0.1945" />
+        <entry key="..\:/Users/eLoving/AndroidStudioProjects/QuizGame/app/src/main/res/drawable/ic_alien.xml" value="0.1235" />
+        <entry key="..\:/Users/eLoving/AndroidStudioProjects/QuizGame/app/src/main/res/drawable/ic_bg.xml" value="0.1945" />
+        <entry key="..\:/Users/eLoving/AndroidStudioProjects/QuizGame/app/src/main/res/drawable/ic_heart.xml" value="0.1945" />
+        <entry key="..\:/Users/eLoving/AndroidStudioProjects/QuizGame/app/src/main/res/drawable/play.xml" value="0.1945" />
+        <entry key="..\:/Users/eLoving/AndroidStudioProjects/QuizGame/app/src/main/res/drawable/run.xml" value="0.1945" />
         <entry key="..\:/Users/eLoving/AndroidStudioProjects/QuizGame/app/src/main/res/drawable/statusbar_bg.xml" value="0.1945" />
-        <entry key="..\:/Users/eLoving/AndroidStudioProjects/QuizGame/app/src/main/res/layout/activity_main.xml" value="0.4188034188034188" />
+        <entry key="..\:/Users/eLoving/AndroidStudioProjects/QuizGame/app/src/main/res/drawable/tourist.xml" value="0.1945" />
+        <entry key="..\:/Users/eLoving/AndroidStudioProjects/QuizGame/app/src/main/res/drawable/wordl.xml" value="0.1945" />
+        <entry key="..\:/Users/eLoving/AndroidStudioProjects/QuizGame/app/src/main/res/layout/activity_main.xml" value="0.152" />
+        <entry key="..\:/Users/eLoving/AndroidStudioProjects/QuizGame/app/src/main/res/layout/fragment_level.xml" value="0.27447916666666666" />
+        <entry key="..\:/Users/eLoving/AndroidStudioProjects/QuizGame/app/src/main/res/layout/fragment_main.xml" value="0.136" />
+        <entry key="..\:/Users/eLoving/AndroidStudioProjects/QuizGame/app/src/main/res/layout/fragment_test.xml" value="0.27447916666666666" />
+        <entry key="..\:/Users/eLoving/AndroidStudioProjects/QuizGame/app/src/main/res/layout/item_level.xml" value="0.2" />
       </map>
     </option>
   </component>

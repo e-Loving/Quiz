@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/iv_bg"
+    tools:context=".ui.LevelFragment">
+
+    <ImageView
+        android:id="@+id/action_bar_blank"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:src="@drawable/actionbar_blank"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btn_back"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="20dp"
+        android:background="@null"
+        android:src="@drawable/btn_back_white"
+        app:layout_constraintBottom_toBottomOf="@id/action_bar_blank"
+        app:layout_constraintStart_toStartOf="@+id/action_bar_blank"
+        app:layout_constraintTop_toTopOf="@+id/action_bar_blank" />
+
+    <ImageButton
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="20dp"
+        android:background="@null"
+        android:src="@drawable/btn_settings_white"
+        app:layout_constraintBottom_toBottomOf="@id/action_bar_blank"
+        app:layout_constraintEnd_toEndOf="@id/action_bar_blank"
+        app:layout_constraintTop_toTopOf="@id/action_bar_blank" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_level"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:listitem="@layout/item_level"
+        app:layout_constraintTop_toBottomOf="@id/action_bar_blank" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
