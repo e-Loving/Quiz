@@ -12,10 +12,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        window.navigationBarColor = Color.parseColor("#FF6F53FD")
-        val fragmentManager = supportFragmentManager
-        val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(binding.container.id, MainFragment())
-        fragmentTransaction.commit()
+        window.navigationBarColor = Color.parseColor("#FF6F53FD") // Change navigation bar color
+        supportFragmentManager
+            .beginTransaction()
+            .add(binding.container.id, MainFragment()) // Add Fragment to MainActivity
+            .commit()
     }
 }

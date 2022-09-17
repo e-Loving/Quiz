@@ -4,19 +4,27 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import uz.eloving.quizgame.data.DataLevel
 import uz.eloving.quizgame.databinding.ItemLevelBinding
 import java.util.ArrayList
 
 class AdapterLevel : RecyclerView.Adapter<AdapterLevel.ViewHolder>() {
-    private var list = arrayListOf<AdapterLevelData>()
+    private var list = arrayListOf<DataLevel>()
+    var onItemClick: ((category: DataLevel) -> Unit)? = null
 
     inner class ViewHolder(private val binding: ItemLevelBinding) :
         RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
-        fun bind(data: AdapterLevelData) {
+        fun bind(data: DataLevel) {
             binding.pic.setImageResource(data.pic)
             binding.degree.setImageResource(data.degree)
             binding.countOfQuestions.text = "0/${data.countOfQuestions}"
+        }
+
+        init {
+            binding.cardView.setOnClickListener {
+                onItemClick?.invoke(list[adapterPosition])
+            }
         }
     }
 
@@ -33,7 +41,9 @@ class AdapterLevel : RecyclerView.Adapter<AdapterLevel.ViewHolder>() {
         return list.size
     }
 
-    fun updateList(list: ArrayList<AdapterLevelData>) {
+    @SuppressLint("NotifyDataSetChanged")
+    fun updateList(list: ArrayList<DataLevel>) {
         this.list = list
+        notifyDataSetChanged()
     }
 }

@@ -1,6 +1,6 @@
-package uz.eloving.quizgame.utils
+package uz.eloving.quizgame.data
 
-data class AdapterLevelData(
+data class DataLevel(
     val pic: Int,
     val countOfQuestions: Int,
     val degree: Int

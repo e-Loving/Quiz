@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import uz.eloving.quizgame.utils.AdapterLevel
 import uz.eloving.quizgame.data.MockData
@@ -19,13 +20,23 @@ class LevelFragment : Fragment() {
     ): View {
         binding = FragmentLevelBinding.inflate(inflater, container, false)
         binding.btnBack.setOnClickListener {
-            requireActivity().onBackPressed()
+            requireActivity().onBackPressed() // Back to MainFragment
         }
+        Toast.makeText(requireContext(), this.arguments?.getString("name").toString(), Toast.LENGTH_SHORT)
+            .show()
         adapter = AdapterLevel()
         binding.rvLevel.adapter = adapter
         binding.rvLevel.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        adapter.updateList(MockData.data)
+            LinearLayoutManager(
+                requireContext(),
+                LinearLayoutManager.VERTICAL,
+                false
+            ) // LayoutManager changed to vertically
+        adapter.updateList(MockData.leveData) // Add Levels to RecyclerView
+        adapter.onItemClick = {
+            Toast.makeText(requireContext(), it.countOfQuestions.toString(), Toast.LENGTH_SHORT)
+                .show()
+        }
         return binding.root
     }
 
