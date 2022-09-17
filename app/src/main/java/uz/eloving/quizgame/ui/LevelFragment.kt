@@ -1,15 +1,19 @@
 package uz.eloving.quizgame.ui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentResultListener
 import androidx.recyclerview.widget.LinearLayoutManager
-import uz.eloving.quizgame.utils.AdapterLevel
+import uz.eloving.quizgame.R
 import uz.eloving.quizgame.data.MockData
 import uz.eloving.quizgame.databinding.FragmentLevelBinding
+import uz.eloving.quizgame.utils.AdapterLevel
 
 class LevelFragment : Fragment() {
     private lateinit var binding: FragmentLevelBinding
@@ -20,10 +24,23 @@ class LevelFragment : Fragment() {
     ): View {
         binding = FragmentLevelBinding.inflate(inflater, container, false)
         binding.btnBack.setOnClickListener {
-            requireActivity().onBackPressed() // Back to MainFragment
+            backPressed()
         }
-        Toast.makeText(requireContext(), this.arguments?.getString("name").toString(), Toast.LENGTH_SHORT)
-            .show()
+        activity?.onBackPressedDispatcher?.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    backPressed()
+                    isEnabled = false
+                }
+            })
+        parentFragmentManager.setFragmentResultListener(
+            "message",
+            viewLifecycleOwner
+        ) { _: String, bundle: Bundle ->
+            Toast.makeText(requireContext(), bundle.getInt("option").toString(), Toast.LENGTH_SHORT)
+                .show()
+        }
         adapter = AdapterLevel()
         binding.rvLevel.adapter = adapter
         binding.rvLevel.layoutManager =
@@ -40,4 +57,8 @@ class LevelFragment : Fragment() {
         return binding.root
     }
 
+    private fun backPressed() {
+        activity?.supportFragmentManager?.beginTransaction()
+            ?.replace(R.id.container, MainFragment())?.commit()
+    }
 }

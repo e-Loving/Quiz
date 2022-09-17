@@ -51,4 +51,6 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.13.2' // glide (image downloading)
     annotationProcessor 'com.github.bumptech.glide:compiler:4.13.2' // glide compiler
     implementation 'com.airbnb.android:lottie:4.2.2' // lottie
+
+    implementation 'androidx.fragment:fragment-ktx:1.5.2'
 }
