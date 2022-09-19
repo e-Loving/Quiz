@@ -5,16 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import uz.eloving.quizgame.data.DataContinent
+import uz.eloving.quizgame.model.ModelCardViewContinent
 import uz.eloving.quizgame.databinding.ItemContinentBinding
 
 class AdapterContinent : RecyclerView.Adapter<AdapterContinent.ViewHolder>() {
-    private var list = arrayListOf<DataContinent>()
-    var onItemClick: ((category: DataContinent) -> Unit)? = null
+    private var list = arrayListOf<ModelCardViewContinent>()
+    var onItemClick: ((category: ModelCardViewContinent) -> Unit)? = null
 
     inner class ViewHolder(private val binding: ItemContinentBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(data: DataContinent) {
+        fun bind(data: ModelCardViewContinent) {
             val items = arrayListOf(
                 binding.ivBgRight,
                 binding.ivBgLeft,
@@ -59,7 +59,7 @@ class AdapterContinent : RecyclerView.Adapter<AdapterContinent.ViewHolder>() {
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun updateList(list: ArrayList<DataContinent>) {
+    fun updateList(list: ArrayList<ModelCardViewContinent>) {
         this.list = list
         notifyDataSetChanged()
     }
