@@ -1,27 +1,22 @@
 package uz.eloving.quizgame.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import uz.eloving.quizgame.R
-import uz.eloving.quizgame.api.RetrofitInstance
 import uz.eloving.quizgame.model.ModelCardViewContinent
 import uz.eloving.quizgame.data.MockData
 import uz.eloving.quizgame.databinding.FragmentMainBinding
-import uz.eloving.quizgame.repository.Repository
 import uz.eloving.quizgame.utils.AdapterContinent
 
 class MainFragment : Fragment() {
     private lateinit var binding: FragmentMainBinding
     private lateinit var adapter: AdapterContinent
-    private lateinit var viewModel: MainFragmentViewModel
     private var option: Int = 0
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,19 +44,8 @@ class MainFragment : Fragment() {
             activity?.supportFragmentManager?.beginTransaction()
                 ?.add(R.id.container, LevelFragment())?.commit()
         }
-        fetchCountry()
         return binding.root
     }
 
-    private fun fetchCountry() {
-        val viewModelFactory = MainViewModelFactory(Repository())
-        viewModel = ViewModelProvider(this, viewModelFactory)[MainFragmentViewModel::class.java]
-        viewModel.getCountry()
-        viewModel.myResponse.observe(requireActivity()) { response ->
-            response.response.forEach {
-                Log.e("eeeeeeeeeeeeeeeer", it.name[0].common)
-            }
-        }
-    }
 
 }
