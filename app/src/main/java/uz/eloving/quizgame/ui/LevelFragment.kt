@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentResultListener
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -33,14 +34,16 @@ class LevelFragment : Fragment() {
                     backPressed()
                     isEnabled = false
                 }
-            })
+            }) // orqaga bosilishni eshitadi
         parentFragmentManager.setFragmentResultListener(
             "message",
             viewLifecycleOwner
         ) { _: String, bundle: Bundle ->
-            Toast.makeText(requireContext(), bundle.getInt("option").toString(), Toast.LENGTH_SHORT)
-                .show()
-        }
+            parentFragmentManager.setFragmentResult(
+                "message2",
+                Bundle(bundleOf("option" to bundle.getInt("option")))
+            )
+        } // ota fragmentdan eski bolasini natijasini oladi
         adapter = AdapterLevel()
         binding.rvLevel.adapter = adapter
         binding.rvLevel.layoutManager =
@@ -49,10 +52,13 @@ class LevelFragment : Fragment() {
                 LinearLayoutManager.VERTICAL,
                 false
             ) // LayoutManager changed to vertically
-        adapter.updateList(MockData.leveData) // Add Levels to RecyclerView
+        adapter.updateList(MockData.levelData) // Add Levels to RecyclerView
         adapter.onItemClick = {
             Toast.makeText(requireContext(), it.countOfQuestions.toString(), Toast.LENGTH_SHORT)
                 .show()
+            activity?.supportFragmentManager?.beginTransaction()
+                ?.replace(R.id.container, GameFragment())?.commit()
+
         }
         return binding.root
     }

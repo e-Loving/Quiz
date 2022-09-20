@@ -40,9 +40,9 @@ class MainFragment : Fragment() {
             parentFragmentManager.setFragmentResult(
                 "message",
                 Bundle(bundleOf("option" to option))
-            )
+            ) // ota fragmentga malumot beriladi
             activity?.supportFragmentManager?.beginTransaction()
-                ?.add(R.id.container, LevelFragment())?.commit()
+                ?.replace(R.id.container, LevelFragment())?.commit() // fragmentlarni alishtiradi
         }
         return binding.root
     }
