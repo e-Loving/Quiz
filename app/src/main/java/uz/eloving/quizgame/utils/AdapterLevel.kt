@@ -2,6 +2,7 @@ package uz.eloving.quizgame.utils
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import uz.eloving.quizgame.model.ModelCardViewLevel
@@ -19,11 +20,15 @@ class AdapterLevel : RecyclerView.Adapter<AdapterLevel.ViewHolder>() {
             binding.pic.setImageResource(data.pic)
             binding.degree.setImageResource(data.degree)
             binding.countOfQuestions.text = "0/${data.countOfQuestions}"
+            itemView.alpha = data.alpha
+            itemView.isClickable = data.clickable
         }
 
         init {
             binding.cardView.setOnClickListener {
-                onItemClick?.invoke(list[adapterPosition])
+                if (it.isClickable) {
+                    onItemClick?.invoke(list[adapterPosition])
+                }
             }
         }
     }

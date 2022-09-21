@@ -31,7 +31,6 @@ class MainFragment : Fragment() {
         adapter.onItemClick = { View ->
             MockData.continentData.forEach { it.isVisible = false }
             option = MockData.continentData.indexOf(View)
-            Toast.makeText(requireContext(), option.toString(), Toast.LENGTH_SHORT).show()
             MockData.continentData[MockData.continentData.indexOf(View)] =
                 ModelCardViewContinent(View.image, true)
             adapter.updateList(MockData.continentData)
@@ -42,7 +41,8 @@ class MainFragment : Fragment() {
                 Bundle(bundleOf("option" to option))
             ) // ota fragmentga malumot beriladi
             activity?.supportFragmentManager?.beginTransaction()
-                ?.replace(R.id.container, LevelFragment())?.commit() // fragmentlarni alishtiradi
+                ?.add(R.id.container, LevelFragment())?.commit() // fragmentlarni alishtiradi
+            activity?.supportFragmentManager?.beginTransaction()?.remove(this)?.commit()
         }
         return binding.root
     }

@@ -1,15 +1,12 @@
 package uz.eloving.quizgame.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentResultListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import uz.eloving.quizgame.R
 import uz.eloving.quizgame.data.MockData
@@ -54,10 +51,10 @@ class LevelFragment : Fragment() {
             ) // LayoutManager changed to vertically
         adapter.updateList(MockData.levelData) // Add Levels to RecyclerView
         adapter.onItemClick = {
-            Toast.makeText(requireContext(), it.countOfQuestions.toString(), Toast.LENGTH_SHORT)
-                .show()
-            activity?.supportFragmentManager?.beginTransaction()
-                ?.replace(R.id.container, GameFragment())?.commit()
+            if (it.clickable) {
+                activity?.supportFragmentManager?.beginTransaction()
+                    ?.add(R.id.container, GameFragment())?.commit()
+            }
 
         }
         return binding.root
@@ -65,6 +62,7 @@ class LevelFragment : Fragment() {
 
     private fun backPressed() {
         activity?.supportFragmentManager?.beginTransaction()
-            ?.replace(R.id.container, MainFragment())?.commit()
+            ?.add(R.id.container, MainFragment())?.commit()
+        activity?.supportFragmentManager?.beginTransaction()?.remove(this)?.commit()
     }
 }
