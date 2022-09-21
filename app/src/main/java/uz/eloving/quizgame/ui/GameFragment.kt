@@ -3,7 +3,6 @@ package uz.eloving.quizgame.ui
 import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +11,7 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.annotation.RequiresApi
+import androidx.core.os.bundleOf
 import com.bumptech.glide.Glide
 import uz.eloving.quizgame.R
 import uz.eloving.quizgame.data.MockData
@@ -93,66 +93,71 @@ class GameFragment : Fragment() {
     }
 
     private fun downloadPhoto(continent: HashMap<String, String>) {
-        binding.allQuestions.text = allQuestions.toString()
-        allQuestions--
-        reset()
         when (incorrect) {
             0 -> binding.ivHeart1.visibility = View.VISIBLE
             1 -> binding.ivHeart1.visibility = View.GONE
             2 -> binding.ivHeart2.visibility = View.GONE
             3 -> binding.ivHeart3.visibility = View.GONE
-            4 -> binding.ivHeart4.visibility = View.GONE
-            else -> {
-                timer.cancel()
-                activity?.supportFragmentManager?.beginTransaction()
-                    ?.replace(R.id.container, ResultFragment())?.commit()
+            4 -> {
+                binding.ivHeart4.visibility = View.GONE
+                next()
             }
         }
-        when (keys) {
-            2 -> binding.ivKey1.visibility = View.GONE
-            1 -> binding.ivKey2.visibility = View.GONE
-            0 -> {
-                binding.ivKey3.visibility = View.GONE
-                binding.keyCard.isClickable = false
+        if (allQuestions == 0) {
+            next()
+        } else {
+            binding.allQuestions.text = allQuestions.toString()
+            allQuestions--
+            reset()
+            when (keys) {
+                2 -> binding.ivKey1.visibility = View.GONE
+                1 -> binding.ivKey2.visibility = View.GONE
+                0 -> {
+                    binding.ivKey3.visibility = View.GONE
+                    binding.keyCard.isClickable = false
+                }
+            }
+            usedData.clear()
+            startTimer()
+            flags.forEach { flag ->
+                var random = Random().nextInt(continent.size)
+                while (random in usedData) {
+                    random = Random().nextInt(continent.size)
+                }
+                usedData.add(random)
+                correctAnswerIndex = usedData[Random().nextInt(usedData.size)]
+                binding.countryName.text = continent.values.toList()[correctAnswerIndex!!]
+                Glide.with(requireContext()).load(
+                    "https://countryflagsapi.com/png/" + continent.keys.toList()[random]
+                ).placeholder(R.drawable.ic_flags).into(flag)
             }
         }
-        usedData.clear()
-        startTimer()
-        flags.forEach { flag ->
-            var random = Random().nextInt(continent.size)
-            while (random in usedData) {
-                random = Random().nextInt(continent.size)
-            }
-            usedData.add(random)
-            correctAnswerIndex = usedData[Random().nextInt(usedData.size)]
-            binding.countryName.text = continent.values.toList()[correctAnswerIndex!!]
-            Glide.with(requireContext()).load(
-                "https://countryflagsapi.com/png/" + continent.keys.toList()[random]
-            ).placeholder(R.drawable.ic_flags).into(flag)
-        }
+
     }
 
     private fun backPressed() {
         activity?.supportFragmentManager?.beginTransaction()
-            ?.add(R.id.container, MainFragment())?.commit()
-        activity?.supportFragmentManager?.beginTransaction()?.remove(this)?.commit()
+            ?.replace(R.id.container, MainFragment())?.commit()
     }
 
     private fun startTimer() {
-        binding.progressHorizontal.progress = 30_000
-        timer = object : CountDownTimer(30_000, 1_000) {
-            override fun onTick(millisUntilFinished: Long) {
-                binding.progressHorizontal.progress = millisUntilFinished.toInt()
-            }
+        if (incorrect < 4) {
+            binding.progressHorizontal.progress = 30_000
+            timer = object : CountDownTimer(30_000, 1_000) {
+                override fun onTick(millisUntilFinished: Long) {
+                    binding.progressHorizontal.progress = millisUntilFinished.toInt()
+                }
 
-            @RequiresApi(Build.VERSION_CODES.M)
-            override fun onFinish() {
-                incorrect++
-                allQuestions--
-                downloadPhoto(option)
+                @RequiresApi(Build.VERSION_CODES.M)
+                override fun onFinish() {
+                    incorrect++
+                    allQuestions--
+                    downloadPhoto(option)
+                }
             }
+            timer.start()
         }
-        timer.start()
+
     }
 
     private fun alertCorrect(img: ImageView) {
@@ -168,5 +173,16 @@ class GameFragment : Fragment() {
         arrayListOf(binding.flag1, binding.flag2, binding.flag3, binding.flag4).forEach {
             it.alpha = 1F
         }
+    }
+
+    private fun next() {
+        timer.cancel()
+        parentFragmentManager.setFragmentResult(
+            "message3",
+            Bundle(bundleOf("option" to bundleOf("correct" to correct)))
+        )
+        Toast.makeText(requireContext(), correct.toString(), Toast.LENGTH_SHORT).show()
+        activity?.supportFragmentManager?.beginTransaction()
+            ?.add(R.id.container, ResultFragment())?.commit()
     }
 }

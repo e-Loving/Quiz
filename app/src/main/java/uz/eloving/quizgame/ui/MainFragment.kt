@@ -41,8 +41,7 @@ class MainFragment : Fragment() {
                 Bundle(bundleOf("option" to option))
             ) // ota fragmentga malumot beriladi
             activity?.supportFragmentManager?.beginTransaction()
-                ?.add(R.id.container, LevelFragment())?.commit() // fragmentlarni alishtiradi
-            activity?.supportFragmentManager?.beginTransaction()?.remove(this)?.commit()
+                ?.replace(R.id.container, LevelFragment())?.commit() // fragmentlarni alishtiradi
         }
         return binding.root
     }

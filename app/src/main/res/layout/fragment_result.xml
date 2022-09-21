@@ -76,29 +76,39 @@
                     android:padding="10dp">
 
                     <ImageView
+                        android:id="@+id/star1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/yulduzcha1" />
+                        android:src="@drawable/yulduzcha1"
+                        android:visibility="gone" />
 
                     <ImageView
+                        android:id="@+id/star2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/yulduzcha1" />
+                        android:src="@drawable/yulduzcha1"
+                        android:visibility="gone" />
 
                     <ImageView
+                        android:id="@+id/star3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/yulduzcha1" />
+                        android:src="@drawable/yulduzcha1"
+                        android:visibility="gone" />
 
                     <ImageView
+                        android:id="@+id/star4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/yulduzcha1" />
+                        android:src="@drawable/yulduzcha1"
+                        android:visibility="gone" />
 
                     <ImageView
+                        android:id="@+id/star5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/yulduzcha1" />
+                        android:src="@drawable/yulduzcha1"
+                        android:visibility="gone" />
 
                 </LinearLayout>
 

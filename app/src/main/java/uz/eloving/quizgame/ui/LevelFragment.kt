@@ -62,7 +62,7 @@ class LevelFragment : Fragment() {
 
     private fun backPressed() {
         activity?.supportFragmentManager?.beginTransaction()
-            ?.add(R.id.container, MainFragment())?.commit()
+            ?.replace(R.id.container, MainFragment())?.commit()
         activity?.supportFragmentManager?.beginTransaction()?.remove(this)?.commit()
     }
 }
