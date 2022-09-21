@@ -69,12 +69,12 @@ class GameFragment : Fragment() {
                 timer.cancel()
                 if (flags.indexOf(flag) == usedData.indexOf(correctAnswerIndex!!)) {
                     correct++
-                    allQuestions--
                     downloadPhoto(option)
                 } else {
                     incorrect++
                     downloadPhoto(option)
                 }
+
             }
         }
         binding.btnBack.setOnClickListener {
@@ -94,14 +94,18 @@ class GameFragment : Fragment() {
 
     private fun downloadPhoto(continent: HashMap<String, String>) {
         binding.allQuestions.text = allQuestions.toString()
+        allQuestions--
         reset()
         when (incorrect) {
+            0 -> binding.ivHeart1.visibility = View.VISIBLE
             1 -> binding.ivHeart1.visibility = View.GONE
             2 -> binding.ivHeart2.visibility = View.GONE
             3 -> binding.ivHeart3.visibility = View.GONE
             4 -> binding.ivHeart4.visibility = View.GONE
             else -> {
-
+                timer.cancel()
+                activity?.supportFragmentManager?.beginTransaction()
+                    ?.replace(R.id.container, ResultFragment())?.commit()
             }
         }
         when (keys) {
@@ -157,7 +161,6 @@ class GameFragment : Fragment() {
         }
         img.alpha = 1F
         timer.cancel()
-        allQuestions--
         keys--
     }
 
