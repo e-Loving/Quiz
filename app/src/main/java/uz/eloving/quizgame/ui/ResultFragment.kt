@@ -1,5 +1,7 @@
 package uz.eloving.quizgame.ui
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.util.Log
@@ -14,10 +16,12 @@ import uz.eloving.quizgame.databinding.FragmentResultBinding
 
 class ResultFragment : Fragment() {
     private lateinit var binding: FragmentResultBinding
+    private lateinit var sharedPreferences: SharedPreferences
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        sharedPreferences = requireContext().getSharedPreferences("App", Context.MODE_PRIVATE)
         activity?.onBackPressedDispatcher?.addCallback(
             viewLifecycleOwner,
             object : OnBackPressedCallback(true) {
@@ -27,13 +31,12 @@ class ResultFragment : Fragment() {
                 }
             })
         binding = FragmentResultBinding.inflate(inflater, container, false)
-        parentFragmentManager.setFragmentResultListener(
-            "message3",
-            viewLifecycleOwner
-        ) { _: String, bundle: Bundle ->
-            setStars(bundle.getInt("correct"))
+        setStars(sharedPreferences.getInt("correct", 0))
+        binding.tryAgain.setOnClickListener {
+            backPressed()
         }
         return binding.root
+
     }
 
     private fun backPressed() {
@@ -41,38 +44,28 @@ class ResultFragment : Fragment() {
             ?.replace(R.id.container, MainFragment())?.commit()
     }
 
-    private fun setStars(data: Int) {
-        when (data) {
-            in 0..3 -> {
-                binding.star1.visibility = View.VISIBLE
-            }
-            in 4..6 -> {
-                binding.star1.visibility = View.VISIBLE
-                binding.star2.visibility = View.VISIBLE
-            }
-            in 7..9 -> {
-                binding.star1.visibility = View.VISIBLE
-                binding.star2.visibility = View.VISIBLE
-                binding.star3.visibility = View.VISIBLE
-            }
-            in 10..12 -> {
-                binding.star1.visibility = View.VISIBLE
-                binding.star2.visibility = View.VISIBLE
-                binding.star3.visibility = View.VISIBLE
-                binding.star4.visibility = View.VISIBLE
-            }
-            in 13..15 -> {
-                binding.star1.visibility = View.VISIBLE
-                binding.star2.visibility = View.VISIBLE
-                binding.star3.visibility = View.VISIBLE
-                binding.star4.visibility = View.VISIBLE
-                binding.star5.visibility = View.VISIBLE
-            }
-            else -> {
 
+    private fun setStars(data: Int) {
+        val target = when (data) {
+            in 0..3 -> 1
+            in 4..6 -> 2
+            in 7..9 -> 3
+            in 10..12 -> 4
+            in 13..15 -> 5
+            else -> 1
+        }
+        val arr = arrayListOf(
+            binding.star1,
+            binding.star2,
+            binding.star3,
+            binding.star4,
+            binding.star5
+        )
+        arr.forEach {
+            if (arr.indexOf(it) <= target) {
+                it.setImageResource(R.drawable.yulduzcha2)
             }
         }
-
     }
 
 }

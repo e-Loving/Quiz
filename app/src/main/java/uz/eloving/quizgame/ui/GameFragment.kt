@@ -1,8 +1,12 @@
 package uz.eloving.quizgame.ui
 
+import android.annotation.SuppressLint
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.view.Display.Mode
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -21,6 +25,7 @@ import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
 class GameFragment : Fragment() {
+    private lateinit var sharedPreferences: SharedPreferences
     private lateinit var binding: FragmentGameBinding
     private lateinit var flags: ArrayList<ImageView>
     private var correctAnswerIndex: Int? = null
@@ -37,6 +42,7 @@ class GameFragment : Fragment() {
     ): View {
         binding = FragmentGameBinding.inflate(inflater, container, false)
         flags = arrayListOf(binding.flag1, binding.flag2, binding.flag3, binding.flag4)
+        sharedPreferences = requireContext().getSharedPreferences("App", Context.MODE_PRIVATE)
         val randoms = arrayListOf<Int>()
         for (item in 0..3) {
             randoms.add(Random().nextInt(3))
@@ -175,12 +181,10 @@ class GameFragment : Fragment() {
         }
     }
 
+    @SuppressLint("CommitPrefEdits")
     private fun next() {
         timer.cancel()
-        parentFragmentManager.setFragmentResult(
-            "message3",
-            Bundle(bundleOf("option" to bundleOf("correct" to correct)))
-        )
+        sharedPreferences.edit().putInt("correct", correct).apply()
         Toast.makeText(requireContext(), correct.toString(), Toast.LENGTH_SHORT).show()
         activity?.supportFragmentManager?.beginTransaction()
             ?.add(R.id.container, ResultFragment())?.commit()

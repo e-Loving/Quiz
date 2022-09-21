@@ -79,36 +79,31 @@
                         android:id="@+id/star1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/yulduzcha1"
-                        android:visibility="gone" />
+                        android:src="@drawable/yulduzcha1"/>
 
                     <ImageView
                         android:id="@+id/star2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/yulduzcha1"
-                        android:visibility="gone" />
+                        android:src="@drawable/yulduzcha1"/>
 
                     <ImageView
                         android:id="@+id/star3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/yulduzcha1"
-                        android:visibility="gone" />
+                        android:src="@drawable/yulduzcha1"/>
 
                     <ImageView
                         android:id="@+id/star4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/yulduzcha1"
-                        android:visibility="gone" />
+                        android:src="@drawable/yulduzcha1"/>
 
                     <ImageView
                         android:id="@+id/star5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/yulduzcha1"
-                        android:visibility="gone" />
+                        android:src="@drawable/yulduzcha1"/>
 
                 </LinearLayout>
 
@@ -127,6 +122,7 @@
 
 
             <ImageView
+                android:id="@+id/try_again"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="35dp"
