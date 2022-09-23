@@ -36,6 +36,13 @@ class LevelFragment : Fragment() {
             "message",
             viewLifecycleOwner
         ) { _: String, bundle: Bundle ->
+            when (bundle.getInt("option")) {
+                0 -> MockData.levelData.forEach { it.countOfQuestions = MockData.all.size }
+                1 -> MockData.levelData.forEach { it.countOfQuestions = MockData.asia.size }
+                2 -> MockData.levelData.forEach { it.countOfQuestions = MockData.europe.size }
+                3 -> MockData.levelData.forEach { it.countOfQuestions = MockData.north_america.size }
+                4 -> MockData.levelData.forEach { it.countOfQuestions = MockData.south_america.size }
+            }
             parentFragmentManager.setFragmentResult(
                 "message2",
                 Bundle(bundleOf("option" to bundle.getInt("option")))

@@ -79,68 +79,48 @@
                         android:id="@+id/star1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/yulduzcha1"/>
+                        android:src="@drawable/yulduzcha2"/>
 
                     <ImageView
                         android:id="@+id/star2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/yulduzcha1"/>
+                        android:src="@drawable/yulduzcha2"/>
 
                     <ImageView
                         android:id="@+id/star3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/yulduzcha1"/>
+                        android:src="@drawable/yulduzcha2"/>
 
                     <ImageView
                         android:id="@+id/star4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/yulduzcha1"/>
+                        android:src="@drawable/yulduzcha2"/>
 
                     <ImageView
                         android:id="@+id/star5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/yulduzcha1"/>
+                        android:src="@drawable/yulduzcha2"/>
 
                 </LinearLayout>
 
 
             </androidx.cardview.widget.CardView>
 
-            <ImageView
-                android:id="@+id/imageView7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:src="@drawable/icon"
-                app:layout_constraintEnd_toEndOf="@+id/cardView2"
-                app:layout_constraintStart_toStartOf="@+id/cardView2"
-                app:layout_constraintTop_toBottomOf="@+id/cardView2" />
-
 
             <ImageView
                 android:id="@+id/try_again"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="35dp"
                 android:layout_marginBottom="-80dp"
                 android:src="@drawable/treagain"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView7" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="35dp"
-                android:layout_marginBottom="-80dp"
-                android:src="@drawable/menu_btn"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView7" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardView2" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

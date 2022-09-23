@@ -28,16 +28,6 @@
         app:layout_constraintStart_toStartOf="@+id/action_bar_blank"
         app:layout_constraintTop_toTopOf="@+id/action_bar_blank" />
 
-    <ImageButton
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="20dp"
-        android:background="@null"
-        android:src="@drawable/btn_settings_white"
-        app:layout_constraintBottom_toBottomOf="@id/action_bar_blank"
-        app:layout_constraintEnd_toEndOf="@id/action_bar_blank"
-        app:layout_constraintTop_toTopOf="@id/action_bar_blank" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_level"
         android:layout_width="match_parent"

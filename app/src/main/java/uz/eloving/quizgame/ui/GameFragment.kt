@@ -135,23 +135,24 @@ class GameFragment : Fragment() {
                 binding.countryName.text = continent.values.toList()[correctAnswerIndex!!]
                 Glide.with(requireContext()).load(
                     "https://countryflagsapi.com/png/" + continent.keys.toList()[random]
-                ).placeholder(R.drawable.ic_flags).into(flag)
+                ).into(flag)
             }
         }
 
     }
 
     private fun backPressed() {
+        timer.cancel()
         activity?.supportFragmentManager?.beginTransaction()
             ?.replace(R.id.container, MainFragment())?.commit()
     }
 
     private fun startTimer() {
+
         if (incorrect < 4) {
-            binding.progressHorizontal.progress = 30_000
-            timer = object : CountDownTimer(30_000, 1_000) {
+            timer = object : CountDownTimer(15_000, 1_000) {
                 override fun onTick(millisUntilFinished: Long) {
-                    binding.progressHorizontal.progress = millisUntilFinished.toInt()
+                    binding.timer.text = timeConversion((millisUntilFinished / 1_000).toInt())
                 }
 
                 @RequiresApi(Build.VERSION_CODES.M)
@@ -163,7 +164,15 @@ class GameFragment : Fragment() {
             }
             timer.start()
         }
+    }
 
+    private fun timeConversion(totalSeconds: Int): String {
+        val MINUTES_IN_AN_HOUR = 60
+        val SECONDS_IN_A_MINUTE = 60
+        val seconds = totalSeconds % SECONDS_IN_A_MINUTE
+        val totalMinutes = totalSeconds / SECONDS_IN_A_MINUTE
+        val minutes = totalMinutes % MINUTES_IN_AN_HOUR
+        return "$minutes : $seconds"
     }
 
     private fun alertCorrect(img: ImageView) {
