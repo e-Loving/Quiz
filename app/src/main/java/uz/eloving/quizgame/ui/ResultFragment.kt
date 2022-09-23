@@ -72,7 +72,7 @@ class ResultFragment : Fragment() {
         )
         arr.forEach {
             if (arr.indexOf(it) <= target) {
-                it.setImageResource(R.drawable.yulduzcha2)
+                it.setImageResource(R.drawable.yulduzcha1)
             }
         }
     }
