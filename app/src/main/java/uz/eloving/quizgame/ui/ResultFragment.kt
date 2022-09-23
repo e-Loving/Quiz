@@ -13,16 +13,15 @@ import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.core.os.bundleOf
 import uz.eloving.quizgame.R
+import uz.eloving.quizgame.data.PrefManager
 import uz.eloving.quizgame.databinding.FragmentResultBinding
 
 class ResultFragment : Fragment() {
     private lateinit var binding: FragmentResultBinding
-    private lateinit var sharedPreferences: SharedPreferences
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        sharedPreferences = requireContext().getSharedPreferences("App", Context.MODE_PRIVATE)
         activity?.onBackPressedDispatcher?.addCallback(
             viewLifecycleOwner,
             object : OnBackPressedCallback(true) {
@@ -32,7 +31,16 @@ class ResultFragment : Fragment() {
                 }
             })
         binding = FragmentResultBinding.inflate(inflater, container, false)
-        setStars(sharedPreferences.getInt("correct", 0))
+        setStars(
+            when (PrefManager.getContinent(requireContext())) {
+                0 -> PrefManager.getHighScoreAll(requireContext())
+                1 -> PrefManager.getHighScoreAsia(requireContext())
+                2 -> PrefManager.getHighScoreEurope(requireContext())
+                3 -> PrefManager.getHighScoreNorthAmerica(requireContext())
+                4 -> PrefManager.getHighScoreSouthAmerica(requireContext())
+                else -> PrefManager.getHighScoreAll(requireContext())
+            }
+        )
         binding.tryAgain.setOnClickListener {
             backPressed()
         }

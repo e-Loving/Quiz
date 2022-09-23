@@ -11,13 +11,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import uz.eloving.quizgame.R
 import uz.eloving.quizgame.model.ModelCardViewContinent
 import uz.eloving.quizgame.data.MockData
+import uz.eloving.quizgame.data.PrefManager
 import uz.eloving.quizgame.databinding.FragmentMainBinding
 import uz.eloving.quizgame.utils.AdapterContinent
 
 class MainFragment : Fragment() {
     private lateinit var binding: FragmentMainBinding
     private lateinit var adapter: AdapterContinent
-    private var option: Int = 0
+    private var option = 0
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,11 +36,9 @@ class MainFragment : Fragment() {
                 ModelCardViewContinent(View.image, true)
             adapter.updateList(MockData.continentData)
         }
+        option = PrefManager.getContinent(requireContext())
         binding.btnPlay.setOnClickListener {
-            parentFragmentManager.setFragmentResult(
-                "message",
-                Bundle(bundleOf("option" to option))
-            ) // ota fragmentga malumot beriladi
+            PrefManager.setContinent(requireContext(), option)
             activity?.supportFragmentManager?.beginTransaction()
                 ?.replace(R.id.container, LevelFragment())?.commit() // fragmentlarni alishtiradi
         }

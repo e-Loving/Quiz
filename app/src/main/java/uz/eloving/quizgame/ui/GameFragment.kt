@@ -19,6 +19,7 @@ import androidx.core.os.bundleOf
 import com.bumptech.glide.Glide
 import uz.eloving.quizgame.R
 import uz.eloving.quizgame.data.MockData
+import uz.eloving.quizgame.data.PrefManager
 import uz.eloving.quizgame.databinding.FragmentGameBinding
 import java.util.*
 import kotlin.collections.ArrayList
@@ -55,20 +56,17 @@ class GameFragment : Fragment() {
                     backPressed()
                 }
             })
-        parentFragmentManager.setFragmentResultListener(
-            "message2",
-            viewLifecycleOwner
-        ) { _: String, bundle: Bundle ->
-            option = when (bundle.getInt("option")) {
-                0 -> MockData.all
-                1 -> MockData.europe
-                2 -> MockData.asia
-                3 -> MockData.north_america
-                4 -> MockData.south_america
-                else -> MockData.europe
-            }
-            downloadPhoto(option)
+
+        option = when (PrefManager.getContinent(requireContext())) {
+            0 -> MockData.all
+            1 -> MockData.europe
+            2 -> MockData.asia
+            3 -> MockData.north_america
+            4 -> MockData.south_america
+            else -> MockData.europe
         }
+        downloadPhoto(option)
+
 
         flags.forEach { flag ->
             flag.setOnClickListener {
@@ -193,7 +191,13 @@ class GameFragment : Fragment() {
     @SuppressLint("CommitPrefEdits")
     private fun next() {
         timer.cancel()
-        sharedPreferences.edit().putInt("correct", correct).apply()
+        when (PrefManager.getContinent(requireContext())) {
+            0 -> PrefManager.setHighScoreAll(requireContext(), correct)
+            1 -> PrefManager.setHighScoreAsia(requireContext(), correct)
+            2 -> PrefManager.setHighScoreEurope(requireContext(), correct)
+            3 -> PrefManager.setHighScoreNorthAmerica(requireContext(), correct)
+            4 -> PrefManager.setHighScoreSouthAmerica(requireContext(), correct)
+        }
         Toast.makeText(requireContext(), correct.toString(), Toast.LENGTH_SHORT).show()
         activity?.supportFragmentManager?.beginTransaction()
             ?.add(R.id.container, ResultFragment())?.commit()

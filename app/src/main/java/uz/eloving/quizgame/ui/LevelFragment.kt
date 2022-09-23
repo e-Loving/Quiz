@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import uz.eloving.quizgame.R
 import uz.eloving.quizgame.data.MockData
+import uz.eloving.quizgame.data.PrefManager
 import uz.eloving.quizgame.databinding.FragmentLevelBinding
 import uz.eloving.quizgame.utils.AdapterLevel
 
@@ -32,22 +33,15 @@ class LevelFragment : Fragment() {
                     isEnabled = false
                 }
             }) // orqaga bosilishni eshitadi
-        parentFragmentManager.setFragmentResultListener(
-            "message",
-            viewLifecycleOwner
-        ) { _: String, bundle: Bundle ->
-            when (bundle.getInt("option")) {
-                0 -> MockData.levelData.forEach { it.countOfQuestions = MockData.all.size }
-                1 -> MockData.levelData.forEach { it.countOfQuestions = MockData.asia.size }
-                2 -> MockData.levelData.forEach { it.countOfQuestions = MockData.europe.size }
-                3 -> MockData.levelData.forEach { it.countOfQuestions = MockData.north_america.size }
-                4 -> MockData.levelData.forEach { it.countOfQuestions = MockData.south_america.size }
-            }
-            parentFragmentManager.setFragmentResult(
-                "message2",
-                Bundle(bundleOf("option" to bundle.getInt("option")))
-            )
-        } // ota fragmentdan eski bolasini natijasini oladi
+
+        when (PrefManager.getContinent(requireContext())) {
+            0 -> MockData.levelData.forEach { it.countOfQuestions = MockData.all.size }
+            1 -> MockData.levelData.forEach { it.countOfQuestions = MockData.asia.size }
+            2 -> MockData.levelData.forEach { it.countOfQuestions = MockData.europe.size }
+            3 -> MockData.levelData.forEach { it.countOfQuestions = MockData.north_america.size }
+            4 -> MockData.levelData.forEach { it.countOfQuestions = MockData.south_america.size }
+        }
+        // ota fragmentdan eski bolasini natijasini oladi
         adapter = AdapterLevel()
         binding.rvLevel.adapter = adapter
         binding.rvLevel.layoutManager =
