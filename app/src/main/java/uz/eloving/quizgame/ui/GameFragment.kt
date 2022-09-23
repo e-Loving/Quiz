@@ -15,7 +15,6 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.annotation.RequiresApi
-import androidx.core.os.bundleOf
 import com.bumptech.glide.Glide
 import uz.eloving.quizgame.R
 import uz.eloving.quizgame.data.MockData
@@ -26,7 +25,6 @@ import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
 class GameFragment : Fragment() {
-    private lateinit var sharedPreferences: SharedPreferences
     private lateinit var binding: FragmentGameBinding
     private lateinit var flags: ArrayList<ImageView>
     private var correctAnswerIndex: Int? = null
@@ -43,7 +41,15 @@ class GameFragment : Fragment() {
     ): View {
         binding = FragmentGameBinding.inflate(inflater, container, false)
         flags = arrayListOf(binding.flag1, binding.flag2, binding.flag3, binding.flag4)
-        sharedPreferences = requireContext().getSharedPreferences("App", Context.MODE_PRIVATE)
+        allQuestions = when (PrefManager.getContinent(requireContext())) {
+            0 -> MockData.all.size
+            1 -> MockData.asia.size
+            2 -> MockData.europe.size
+            3 -> MockData.north_america.size
+            4 -> MockData.south_america.size
+            else -> MockData.all.size
+
+        }
         val randoms = arrayListOf<Int>()
         for (item in 0..3) {
             randoms.add(Random().nextInt(3))

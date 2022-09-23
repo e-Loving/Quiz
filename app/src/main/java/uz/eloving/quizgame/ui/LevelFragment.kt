@@ -42,7 +42,7 @@ class LevelFragment : Fragment() {
             4 -> MockData.levelData.forEach { it.countOfQuestions = MockData.south_america.size }
         }
         // ota fragmentdan eski bolasini natijasini oladi
-        adapter = AdapterLevel()
+        adapter = AdapterLevel(requireContext())
         binding.rvLevel.adapter = adapter
         binding.rvLevel.layoutManager =
             LinearLayoutManager(
