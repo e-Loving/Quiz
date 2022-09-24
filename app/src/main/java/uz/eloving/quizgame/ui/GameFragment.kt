@@ -1,12 +1,9 @@
 package uz.eloving.quizgame.ui
 
 import android.annotation.SuppressLint
-import android.content.Context
-import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.view.Display.Mode
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -23,6 +20,7 @@ import uz.eloving.quizgame.databinding.FragmentGameBinding
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
+import uz.eloving.quizgame.utils.SafeClickListener.Companion.setSafeOnClickListener
 
 class GameFragment : Fragment() {
     private lateinit var binding: FragmentGameBinding
@@ -49,6 +47,11 @@ class GameFragment : Fragment() {
             4 -> MockData.south_america.size
             else -> MockData.all.size
 
+        }
+        arrayListOf(binding.main, binding.secondary).forEach {
+            it.setSafeOnClickListener {
+
+            }
         }
         val randoms = arrayListOf<Int>()
         for (item in 0..3) {
