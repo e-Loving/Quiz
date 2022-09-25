@@ -1,14 +1,22 @@
 package uz.eloving.quizgame.utils
 
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
+import uz.eloving.quizgame.R
+import uz.eloving.quizgame.data.PrefManager
 import uz.eloving.quizgame.model.ModelCardViewContinent
 import uz.eloving.quizgame.databinding.ItemContinentBinding
+import uz.eloving.quizgame.ui.LevelFragment
+import uz.eloving.quizgame.utils.SafeClickListener.Companion.setSafeOnClickListener
 
-class AdapterContinent : RecyclerView.Adapter<AdapterContinent.ViewHolder>() {
+class AdapterContinent(private var activity: FragmentActivity) : RecyclerView.Adapter<AdapterContinent.ViewHolder>() {
     private var list = arrayListOf<ModelCardViewContinent>()
     var onItemClick: ((category: ModelCardViewContinent) -> Unit)? = null
 
@@ -33,6 +41,10 @@ class AdapterContinent : RecyclerView.Adapter<AdapterContinent.ViewHolder>() {
                 items.forEach {
                     it.visibility = View.GONE
                 }
+            }
+            binding.lottiePlay.setSafeOnClickListener {
+                activity.supportFragmentManager.beginTransaction()
+                    .replace(R.id.container, LevelFragment()).commit()
             }
             binding.ivContinent.setImageResource(data.image)
         }

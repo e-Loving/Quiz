@@ -24,7 +24,7 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentMainBinding.inflate(inflater, container, false)
-        adapter = AdapterContinent()
+        adapter = activity?.let { AdapterContinent(it) }!!
         binding.rvContinent.adapter = adapter
         binding.rvContinent.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
