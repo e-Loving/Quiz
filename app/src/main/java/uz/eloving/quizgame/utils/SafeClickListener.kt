@@ -1,6 +1,5 @@
 package uz.eloving.quizgame.utils
 
-import android.icu.util.DateInterval
 import android.os.SystemClock
 import android.view.View
 

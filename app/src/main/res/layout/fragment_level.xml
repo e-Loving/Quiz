@@ -28,6 +28,17 @@
         app:layout_constraintStart_toStartOf="@+id/action_bar_blank"
         app:layout_constraintTop_toTopOf="@+id/action_bar_blank" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Levels"
+        android:textColor="@color/white"
+        android:textSize="32sp"
+        app:layout_constraintBottom_toBottomOf="@+id/action_bar_blank"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_level"
         android:layout_width="match_parent"

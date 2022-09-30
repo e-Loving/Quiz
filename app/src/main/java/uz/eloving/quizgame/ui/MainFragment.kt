@@ -42,6 +42,18 @@ class MainFragment : Fragment() {
             activity?.supportFragmentManager?.beginTransaction()
                 ?.replace(R.id.container, LevelFragment())?.commit() // fragmentlarni alishtiradi
         }
+
+        adapter.onItemClick2={ View ->
+            MockData.continentData.forEach { it.isVisible = false }
+            option = MockData.continentData.indexOf(View)
+            MockData.continentData[MockData.continentData.indexOf(View)] =
+                ModelCardViewContinent(View.image, true)
+            adapter.updateList(MockData.continentData)
+            PrefManager.setContinent(requireContext(), option)
+            activity?.supportFragmentManager?.beginTransaction()
+                ?.replace(R.id.container, LevelFragment())?.commit()
+        }
+
         return binding.root
     }
 

@@ -157,10 +157,27 @@ class GameFragment : Fragment() {
     private fun startTimer() {
 
         if (incorrect < 4) {
-            timer = object : CountDownTimer(15_000, 1_000) {
+            binding.progressHorizontal.progress = 16_000
+            timer = object : CountDownTimer(16_000, 1_000) {
                 override fun onTick(millisUntilFinished: Long) {
+
+
+                    if (millisUntilFinished < 6000) {
+                        binding.timer.setTextColor(0xFFE6DFDF.toInt())
+                        binding.cadrtimer.setCardBackgroundColor(0xFFD30C0C.toInt())
+
+                    } else if (millisUntilFinished > 6000) {
+                        binding.timer.setTextColor(0xFF090808.toInt())
+                        binding.cadrtimer.setCardBackgroundColor(0xFFE6DFDF.toInt())
+
+                    }
+
+
                     binding.timer.text = timeConversion((millisUntilFinished / 1_000).toInt())
+                    binding.progressHorizontal.progress = millisUntilFinished.toInt()
+
                 }
+
 
                 @RequiresApi(Build.VERSION_CODES.M)
                 override fun onFinish() {
@@ -170,7 +187,10 @@ class GameFragment : Fragment() {
                 }
             }
             timer.start()
+
+
         }
+
     }
 
     private fun timeConversion(totalSeconds: Int): String {
@@ -179,7 +199,7 @@ class GameFragment : Fragment() {
         val seconds = totalSeconds % SECONDS_IN_A_MINUTE
         val totalMinutes = totalSeconds / SECONDS_IN_A_MINUTE
         val minutes = totalMinutes % MINUTES_IN_AN_HOUR
-        return "$minutes : $seconds"
+        return "$seconds"
     }
 
     private fun alertCorrect(img: ImageView) {
