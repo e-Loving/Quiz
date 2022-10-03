@@ -1,6 +1,10 @@
 package uz.eloving.quizgame.ui
 
 import android.annotation.SuppressLint
+import android.app.ProgressDialog
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -37,71 +41,109 @@ open class GameFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentGameBinding.inflate(inflater, container, false)
-        flags = arrayListOf(binding.flag1, binding.flag2, binding.flag3, binding.flag4)
-        allQuestions = when (PrefManager.getContinent(requireContext())) {
-            0 -> MockData.all.size
-            1 -> MockData.asia.size
-            2 -> MockData.europe.size
-            3 -> MockData.north_america.size
-            4 -> MockData.south_america.size
-            else -> MockData.all.size
 
-        }
-        arrayListOf(binding.main, binding.secondary).forEach {
-            it.setSafeOnClickListener {
+        isInternetOn()
 
-            }
-        }
-        val randoms = arrayListOf<Int>()
-        for (item in 0..3) {
-            randoms.add(Random().nextInt(3))
-        }
-        activity?.onBackPressedDispatcher?.addCallback(
-            viewLifecycleOwner,
-            object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {
-                    isEnabled = false
-                    backPressed()
-                }
-            })
-
-        option = when (PrefManager.getContinent(requireContext())) {
-            0 -> MockData.all
-            1 -> MockData.europe
-            2 -> MockData.asia
-            3 -> MockData.north_america
-            4 -> MockData.south_america
-            else -> MockData.europe
-        }
-        downloadPhoto(option)
-
-
-        flags.forEach { flag ->
-            flag.setOnClickListener {
-                timer.cancel()
-                if (flags.indexOf(flag) == usedData.indexOf(correctAnswerIndex!!)) {
-                    correct++
-                    downloadPhoto(option)
-                } else {
-                    incorrect++
-                    downloadPhoto(option)
-                }
-
-            }
-        }
-        binding.btnBack.setOnClickListener {
-            backPressed()
-        }
-        binding.keyCard.setOnClickListener {
-            when (usedData.indexOf(correctAnswerIndex)) {
-                0 -> alertCorrect(binding.flag1)
-                1 -> alertCorrect(binding.flag2)
-                2 -> alertCorrect(binding.flag3)
-                3 -> alertCorrect(binding.flag4)
-            }
-
-        }
         return binding.root
+    }
+
+
+    private fun isInternetOn(): Boolean {
+        val connec =
+            requireActivity().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+        //check for network connections
+        if (connec.getNetworkInfo(0)!!.state == NetworkInfo.State.CONNECTED || connec.getNetworkInfo(
+                0
+            )!!.state == NetworkInfo.State.CONNECTING || connec.getNetworkInfo(1)!!.state == NetworkInfo.State.CONNECTING || connec.getNetworkInfo(
+                1
+            )!!.state == NetworkInfo.State.CONNECTED
+        ) {
+
+            Toast.makeText(activity, "Connected", Toast.LENGTH_LONG).show()
+            flags = arrayListOf(binding.flag1, binding.flag2, binding.flag3, binding.flag4)
+            allQuestions = when (PrefManager.getContinent(requireContext())) {
+                0 -> MockData.all.size
+                1 -> MockData.asia.size
+                2 -> MockData.europe.size
+                3 -> MockData.north_america.size
+                4 -> MockData.south_america.size
+                else -> MockData.all.size
+
+            }
+            arrayListOf(binding.main, binding.secondary).forEach {
+                it.setSafeOnClickListener {
+
+                }
+            }
+            val randoms = arrayListOf<Int>()
+            for (item in 0..3) {
+                randoms.add(Random().nextInt(3))
+            }
+            activity?.onBackPressedDispatcher?.addCallback(
+                viewLifecycleOwner,
+                object : OnBackPressedCallback(true) {
+                    override fun handleOnBackPressed() {
+                        isEnabled = false
+                        backPressed()
+                    }
+                })
+
+            option = when (PrefManager.getContinent(requireContext())) {
+                0 -> MockData.all
+                1 -> MockData.europe
+                2 -> MockData.asia
+                3 -> MockData.north_america
+                4 -> MockData.south_america
+                else -> MockData.europe
+            }
+            downloadPhoto(option)
+
+
+            flags.forEach { flag ->
+                flag.setOnClickListener {
+                    timer.cancel()
+                    if (flags.indexOf(flag) == usedData.indexOf(correctAnswerIndex!!)) {
+                        correct++
+                        downloadPhoto(option)
+                    } else {
+                        incorrect++
+                        downloadPhoto(option)
+                    }
+
+                }
+            }
+            binding.btnBack.setOnClickListener {
+                backPressed()
+            }
+            binding.keyCard.setOnClickListener {
+                when (usedData.indexOf(correctAnswerIndex)) {
+                    0 -> alertCorrect(binding.flag1)
+                    1 -> alertCorrect(binding.flag2)
+                    2 -> alertCorrect(binding.flag3)
+                    3 -> alertCorrect(binding.flag4)
+                }
+
+            }
+            return true
+        } else if (connec.getNetworkInfo(0)!!.state == NetworkInfo.State.DISCONNECTED ||
+            connec.getNetworkInfo(1)!!.state == NetworkInfo.State.DISCONNECTED
+        ) {
+
+            Toast.makeText(activity, "Not Connected", Toast.LENGTH_LONG).show()
+            progressDialog()
+            return false
+        }
+        return false
+    }
+
+    fun progressDialog() {
+        val prgDialog = ProgressDialog(requireContext())
+        prgDialog.setTitle("Progress Dialog")
+        prgDialog.setMessage("check the internet")
+        prgDialog.show()
+
+
     }
 
     private fun downloadPhoto(continent: HashMap<String, String>) {
@@ -226,11 +268,12 @@ open class GameFragment : Fragment() {
             3 -> PrefManager.setHighScoreNorthAmerica(requireContext(), correct)
             4 -> PrefManager.setHighScoreSouthAmerica(requireContext(), correct)
         }
+        
+
         Toast.makeText(requireContext(), correct.toString(), Toast.LENGTH_SHORT).show()
         activity?.supportFragmentManager?.beginTransaction()
             ?.add(R.id.container, ResultFragment())?.commit()
     }
-
 
 
 }

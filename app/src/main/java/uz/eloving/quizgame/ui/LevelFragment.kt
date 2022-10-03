@@ -1,5 +1,6 @@
 package uz.eloving.quizgame.ui
 
+import android.app.ProgressDialog
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
@@ -57,7 +58,7 @@ class LevelFragment : Fragment() {
         adapter.updateList(MockData.levelData) // Add Levels to RecyclerView
         adapter.onItemClick = {
             if (it.clickable) {
-                isInternetOn()
+//                isInternetOn()
                 activity?.supportFragmentManager?.beginTransaction()
                     ?.add(R.id.container, GameFragment())?.commit()
 
@@ -73,26 +74,28 @@ class LevelFragment : Fragment() {
         activity?.supportFragmentManager?.beginTransaction()?.remove(this)?.commit()
     }
 
-    protected fun isInternetOn(): Boolean {
-        val connec =
-            requireActivity().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+//    protected fun isInternetOn(): Boolean {
+//        val connec =
+//            requireActivity().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+//
+//        //check for network connections
+//        if (connec.getNetworkInfo(0)!!.state == NetworkInfo.State.CONNECTED || connec.getNetworkInfo(
+//                0
+//            )!!.state == NetworkInfo.State.CONNECTING || connec.getNetworkInfo(1)!!.state == NetworkInfo.State.CONNECTING || connec.getNetworkInfo(
+//                1
+//            )!!.state == NetworkInfo.State.CONNECTED
+//        ) {
+//            Toast.makeText(activity, "Connected", Toast.LENGTH_LONG).show()
+//            return true
+//        } else if (connec.getNetworkInfo(0)!!.state == NetworkInfo.State.DISCONNECTED ||
+//            connec.getNetworkInfo(1)!!.state == NetworkInfo.State.DISCONNECTED
+//        ) {
+//            progressDialog()
+//            Toast.makeText(activity, "Not Connected", Toast.LENGTH_LONG).show()
+//            return false
+//        }
+//        return false
+//    }
 
-        //check for network connections
-        if (connec.getNetworkInfo(0)!!.state == NetworkInfo.State.CONNECTED || connec.getNetworkInfo(
-                0
-            )!!.state == NetworkInfo.State.CONNECTING || connec.getNetworkInfo(1)!!.state == NetworkInfo.State.CONNECTING || connec.getNetworkInfo(
-                1
-            )!!.state == NetworkInfo.State.CONNECTED
-        ) {
-            Toast.makeText(activity, "Connected", Toast.LENGTH_LONG).show()
-            return true
-        } else if (connec.getNetworkInfo(0)!!.state == NetworkInfo.State.DISCONNECTED ||
-            connec.getNetworkInfo(1)!!.state == NetworkInfo.State.DISCONNECTED
-        ) {
-            Toast.makeText(activity, "Not Connected", Toast.LENGTH_LONG).show()
-            return false
-        }
-        return false
-    }
 
 }

@@ -6,11 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
-import uz.eloving.quizgame.InfoFragment
+import uz.eloving.quizgame.ui.InfoFragment
 import uz.eloving.quizgame.R
 import uz.eloving.quizgame.model.ModelCardViewContinent
 import uz.eloving.quizgame.databinding.ItemContinentBinding
-import uz.eloving.quizgame.ui.LevelFragment
 import uz.eloving.quizgame.utils.SafeClickListener.Companion.setSafeOnClickListener
 
 class AdapterContinent(private var activity: FragmentActivity) : RecyclerView.Adapter<AdapterContinent.ViewHolder>() {
@@ -46,7 +45,7 @@ class AdapterContinent(private var activity: FragmentActivity) : RecyclerView.Ad
 
             binding.lottieInfo.setSafeOnClickListener {
             activity.supportFragmentManager.beginTransaction()
-                .replace(R.id.container,InfoFragment()).commit()
+                .replace(R.id.container, InfoFragment()).commit()
             }
 
             binding.ivContinent.setImageResource(data.image)
