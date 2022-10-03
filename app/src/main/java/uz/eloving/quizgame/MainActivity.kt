@@ -1,6 +1,10 @@
 package uz.eloving.quizgame
 
+import android.content.Context
 import android.graphics.Color
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import uz.eloving.quizgame.databinding.ActivityMainBinding
@@ -12,6 +16,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         window.navigationBarColor = Color.parseColor("#FF6F53FD") // Change navigation bar color
         supportFragmentManager
             .beginTransaction()

@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,17 +11,17 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.annotation.RequiresApi
+import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import uz.eloving.quizgame.R
 import uz.eloving.quizgame.data.MockData
 import uz.eloving.quizgame.data.PrefManager
 import uz.eloving.quizgame.databinding.FragmentGameBinding
-import java.util.*
-import kotlin.collections.ArrayList
-import kotlin.collections.HashMap
 import uz.eloving.quizgame.utils.SafeClickListener.Companion.setSafeOnClickListener
+import java.util.*
 
-class GameFragment : Fragment() {
+
+open class GameFragment : Fragment() {
     private lateinit var binding: FragmentGameBinding
     private lateinit var flags: ArrayList<ImageView>
     private var correctAnswerIndex: Int? = null
@@ -231,4 +230,7 @@ class GameFragment : Fragment() {
         activity?.supportFragmentManager?.beginTransaction()
             ?.add(R.id.container, ResultFragment())?.commit()
     }
+
+
+
 }
