@@ -8,6 +8,7 @@ import android.net.NetworkInfo
 import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -104,11 +105,17 @@ open class GameFragment : Fragment() {
                 flag.setOnClickListener {
                     timer.cancel()
                     if (flags.indexOf(flag) == usedData.indexOf(correctAnswerIndex!!)) {
+                        flag.setBackgroundResource(R.drawable.correct_border_shape)
                         correct++
-                        downloadPhoto(option)
+                        Handler().postDelayed({
+                            downloadPhoto(option)
+                        }, 2000)
                     } else {
+                        flag.setBackgroundResource(R.drawable.incorrect_border_shape)
                         incorrect++
-                        downloadPhoto(option)
+                        Handler().postDelayed({
+                            downloadPhoto(option)
+                        }, 2000)
                     }
 
                 }
@@ -157,6 +164,11 @@ open class GameFragment : Fragment() {
                 next()
             }
         }
+        binding.flag1.setBackgroundResource(R.drawable.flag_background)
+        binding.flag2.setBackgroundResource(R.drawable.flag_background)
+        binding.flag3.setBackgroundResource(R.drawable.flag_background)
+        binding.flag4.setBackgroundResource(R.drawable.flag_background)
+
         if (allQuestions == 0) {
             next()
         } else {
@@ -268,7 +280,7 @@ open class GameFragment : Fragment() {
             3 -> PrefManager.setHighScoreNorthAmerica(requireContext(), correct)
             4 -> PrefManager.setHighScoreSouthAmerica(requireContext(), correct)
         }
-        
+
 
         Toast.makeText(requireContext(), correct.toString(), Toast.LENGTH_SHORT).show()
         activity?.supportFragmentManager?.beginTransaction()

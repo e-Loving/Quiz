@@ -123,6 +123,7 @@
         </LinearLayout>
 
         <androidx.cardview.widget.CardView
+            android:foreground="?attr/selectableItemBackground"
             android:id="@+id/key_card"
             android:layout_width="90dp"
             android:layout_height="30dp"
@@ -184,16 +185,15 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:layout_marginBottom="30dp"
-        app:cardCornerRadius="20dp"
         app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+            android:layout_height="match_parent">
 
             <ImageView
                 android:id="@+id/flag1"
@@ -203,6 +203,7 @@
                 android:layout_marginBottom="25dp"
                 android:background="@drawable/flag_background"
                 android:backgroundTint="@color/black"
+                android:foreground="?attr/selectableItemBackground"
                 android:scaleType="fitXY"
                 android:src="@drawable/ic_flags"
                 app:layout_constraintBottom_toTopOf="@+id/flag3"
@@ -215,6 +216,7 @@
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="25dp"
                 android:background="@drawable/flag_background"
+                android:foreground="?attr/selectableItemBackground"
                 android:scaleType="fitXY"
                 android:src="@drawable/ic_flags"
                 app:layout_constraintBottom_toTopOf="@+id/flag4"
@@ -227,6 +229,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginBottom="50dp"
                 android:background="@drawable/flag_background"
+                android:foreground="?attr/selectableItemBackground"
                 android:scaleType="fitXY"
                 android:src="@drawable/ic_flags"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -239,6 +242,7 @@
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="50dp"
                 android:background="@drawable/flag_background"
+                android:foreground="?attr/selectableItemBackground"
                 android:scaleType="fitXY"
                 android:src="@drawable/ic_flags"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -260,10 +264,10 @@
                     android:id="@+id/allQuestions"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|center_vertical"
                     android:text="15"
                     android:textColor="@color/white"
                     android:textSize="18sp"
-                    android:layout_gravity="center_horizontal|center_vertical"
 
                     />
 
