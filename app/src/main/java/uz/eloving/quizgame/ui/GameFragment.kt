@@ -3,6 +3,7 @@ package uz.eloving.quizgame.ui
 import android.annotation.SuppressLint
 import android.app.ProgressDialog
 import android.content.Context
+import android.media.MediaPlayer
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.os.Build
@@ -16,6 +17,7 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.annotation.RequiresApi
+import androidx.core.view.setPadding
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import uz.eloving.quizgame.R
@@ -36,6 +38,13 @@ open class GameFragment : Fragment() {
     private lateinit var timer: CountDownTimer
     private var allQuestions = 15
     private var usedData = arrayListOf<Int>()
+
+    //    val lottie = arrayListOf(
+//        binding.lottie1,
+//        binding.lottie2,
+//        binding.lottie3,
+//        binding.lottie4
+//    )
     private lateinit var option: HashMap<String, String>
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -102,17 +111,26 @@ open class GameFragment : Fragment() {
 
 
             flags.forEach { flag ->
+
                 flag.setOnClickListener {
+//                    binding.lottie1.visibility = View.VISIBLE
+//                    binding.lottie1.playAnimation()
                     timer.cancel()
                     if (flags.indexOf(flag) == usedData.indexOf(correctAnswerIndex!!)) {
-                        flag.setBackgroundResource(R.drawable.correct_border_shape)
+                        flag.setImageResource(R.drawable.truesvg)
+                        flag.setPadding(20)
                         correct++
+                        val truee = MediaPlayer.create(requireContext(), R.raw.trueee)
+                        truee.start()
                         Handler().postDelayed({
                             downloadPhoto(option)
                         }, 2000)
                     } else {
-                        flag.setBackgroundResource(R.drawable.incorrect_border_shape)
+                        flag.setImageResource(R.drawable.falsesvg)
+                        val falsee = MediaPlayer.create(requireContext(), R.raw.falsee)
+                        falsee.start()
                         incorrect++
+                        flag.setPadding(20)
                         Handler().postDelayed({
                             downloadPhoto(option)
                         }, 2000)
@@ -147,7 +165,7 @@ open class GameFragment : Fragment() {
     fun progressDialog() {
         val prgDialog = ProgressDialog(requireContext())
         prgDialog.setTitle("Progress Dialog")
-        prgDialog.setMessage("check the internet")
+        prgDialog.setMessage("check the internet connection")
         prgDialog.show()
 
 
@@ -168,6 +186,16 @@ open class GameFragment : Fragment() {
         binding.flag2.setBackgroundResource(R.drawable.flag_background)
         binding.flag3.setBackgroundResource(R.drawable.flag_background)
         binding.flag4.setBackgroundResource(R.drawable.flag_background)
+
+//        binding.lottie1.visibility = View.GONE
+//        binding.lottie2.visibility = View.GONE
+//        binding.lottie3.visibility = View.GONE
+//        binding.lottie4.visibility = View.GONE
+
+        binding.flag1.setPadding(5)
+        binding.flag2.setPadding(5)
+        binding.flag3.setPadding(5)
+        binding.flag4.setPadding(5)
 
         if (allQuestions == 0) {
             next()
@@ -236,6 +264,8 @@ open class GameFragment : Fragment() {
                 override fun onFinish() {
                     incorrect++
                     allQuestions--
+                    val falsee = MediaPlayer.create(requireContext(), R.raw.falsee)
+                    falsee.start()
                     downloadPhoto(option)
                 }
             }

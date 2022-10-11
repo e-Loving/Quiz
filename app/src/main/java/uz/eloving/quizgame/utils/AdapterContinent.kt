@@ -12,7 +12,8 @@ import uz.eloving.quizgame.model.ModelCardViewContinent
 import uz.eloving.quizgame.databinding.ItemContinentBinding
 import uz.eloving.quizgame.utils.SafeClickListener.Companion.setSafeOnClickListener
 
-class AdapterContinent(private var activity: FragmentActivity) : RecyclerView.Adapter<AdapterContinent.ViewHolder>() {
+class AdapterContinent(private var activity: FragmentActivity) :
+    RecyclerView.Adapter<AdapterContinent.ViewHolder>() {
     private var list = arrayListOf<ModelCardViewContinent>()
     var onItemClick: ((category: ModelCardViewContinent) -> Unit)? = null
     var onItemClick2: ((category: ModelCardViewContinent) -> Unit)? = null
@@ -20,6 +21,9 @@ class AdapterContinent(private var activity: FragmentActivity) : RecyclerView.Ad
     inner class ViewHolder(private val binding: ItemContinentBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(data: ModelCardViewContinent) {
+
+
+
             val items = arrayListOf(
                 binding.ivBgRight,
                 binding.ivBgLeft,
@@ -44,8 +48,8 @@ class AdapterContinent(private var activity: FragmentActivity) : RecyclerView.Ad
             }
 
             binding.lottieInfo.setSafeOnClickListener {
-            activity.supportFragmentManager.beginTransaction()
-                .replace(R.id.container, InfoFragment()).commit()
+                activity.supportFragmentManager.beginTransaction()
+                    .replace(R.id.container, InfoFragment()).commit()
             }
 
             binding.ivContinent.setImageResource(data.image)

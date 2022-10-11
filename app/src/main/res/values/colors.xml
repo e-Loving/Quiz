@@ -9,5 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="navigationBar">#FF6F53FD</color>
     <color name="ColorNightAndLight">#ffffff</color>
+    <color name="yellow">#FFEB3B</color>
 
 </resources>

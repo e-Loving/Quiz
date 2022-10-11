@@ -59,7 +59,7 @@ dependencies {
     }
     implementation 'com.airbnb.android:lottie:4.2.2' // lottie
 
-    implementation 'androidx.fragment:fragment-ktx:1.5.2' // fragment
+    implementation 'androidx.fragment:fragment-ktx:1.5.3' // fragment
 
     implementation 'com.squareup.moshi:moshi-kotlin:1.12.0' // moshi
     implementation 'com.squareup.retrofit2:converter-moshi:2.9.0' // moshi convertor

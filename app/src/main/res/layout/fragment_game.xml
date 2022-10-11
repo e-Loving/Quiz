@@ -123,11 +123,11 @@
         </LinearLayout>
 
         <androidx.cardview.widget.CardView
-            android:foreground="?attr/selectableItemBackground"
             android:id="@+id/key_card"
             android:layout_width="90dp"
             android:layout_height="30dp"
             android:layout_marginEnd="20dp"
+            android:foreground="?attr/selectableItemBackground"
             app:cardBackgroundColor="@color/purple_500"
             app:cardCornerRadius="50dp"
             app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
@@ -170,14 +170,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal|center_vertical"
-        android:text="Uzbekistan"
+        android:text="State"
         android:textColor="@color/white"
         android:textSize="30dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/cardView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cadrtimer" />
+        app:layout_constraintTop_toBottomOf="@+id/secondary" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView2"
@@ -202,12 +202,23 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginBottom="25dp"
                 android:background="@drawable/flag_background"
-                android:backgroundTint="@color/black"
                 android:foreground="?attr/selectableItemBackground"
                 android:scaleType="fitXY"
-                android:src="@drawable/ic_flags"
+                android:src="@mipmap/logo"
                 app:layout_constraintBottom_toTopOf="@+id/flag3"
                 app:layout_constraintLeft_toLeftOf="parent" />
+
+<!--            <com.airbnb.lottie.LottieAnimationView-->
+<!--                android:id="@+id/lottie1"-->
+<!--                android:layout_width="134dp"-->
+<!--                android:layout_height="110dp"-->
+<!--                android:layout_marginStart="20dp"-->
+<!--                android:layout_marginBottom="25dp"-->
+<!--                app:layout_constraintBottom_toTopOf="@+id/flag3"-->
+<!--                app:layout_constraintLeft_toLeftOf="parent"-->
+<!--                app:lottie_autoPlay="true"-->
+<!--                app:lottie_loop="true"-->
+<!--                app:lottie_rawRes="@raw/truee" />-->
 
             <ImageView
                 android:id="@+id/flag2"
@@ -218,9 +229,21 @@
                 android:background="@drawable/flag_background"
                 android:foreground="?attr/selectableItemBackground"
                 android:scaleType="fitXY"
-                android:src="@drawable/ic_flags"
+                android:src="@mipmap/logo"
                 app:layout_constraintBottom_toTopOf="@+id/flag4"
                 app:layout_constraintRight_toRightOf="parent" />
+
+<!--            <com.airbnb.lottie.LottieAnimationView-->
+<!--                android:id="@+id/lottie2"-->
+<!--                android:layout_width="134dp"-->
+<!--                android:layout_height="110dp"-->
+<!--                android:layout_marginEnd="20dp"-->
+<!--                android:layout_marginBottom="25dp"-->
+<!--                app:layout_constraintBottom_toTopOf="@+id/flag4"-->
+<!--                app:layout_constraintRight_toRightOf="parent"-->
+<!--                app:lottie_autoPlay="true"-->
+<!--                app:lottie_loop="true"-->
+<!--                app:lottie_rawRes="@raw/truee" />-->
 
             <ImageView
                 android:id="@+id/flag3"
@@ -231,9 +254,21 @@
                 android:background="@drawable/flag_background"
                 android:foreground="?attr/selectableItemBackground"
                 android:scaleType="fitXY"
-                android:src="@drawable/ic_flags"
+                android:src="@mipmap/logo"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent" />
+
+<!--            <com.airbnb.lottie.LottieAnimationView-->
+<!--                android:id="@+id/lottie3"-->
+<!--                android:layout_width="134dp"-->
+<!--                android:layout_height="110dp"-->
+<!--                android:layout_marginStart="20dp"-->
+<!--                android:layout_marginBottom="50dp"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintLeft_toLeftOf="parent"-->
+<!--                app:lottie_autoPlay="true"-->
+<!--                app:lottie_loop="true"-->
+<!--                app:lottie_rawRes="@raw/truee" />-->
 
             <ImageView
                 android:id="@+id/flag4"
@@ -244,9 +279,21 @@
                 android:background="@drawable/flag_background"
                 android:foreground="?attr/selectableItemBackground"
                 android:scaleType="fitXY"
-                android:src="@drawable/ic_flags"
+                android:src="@mipmap/logo"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="parent" />
+
+<!--            <com.airbnb.lottie.LottieAnimationView-->
+<!--                android:id="@+id/lottie4"-->
+<!--                android:layout_width="134dp"-->
+<!--                android:layout_height="110dp"-->
+<!--                android:layout_marginEnd="20dp"-->
+<!--                android:layout_marginBottom="50dp"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintRight_toRightOf="parent"-->
+<!--                app:lottie_autoPlay="true"-->
+<!--                app:lottie_loop="true"-->
+<!--                app:lottie_rawRes="@raw/truee" />-->
 
             <androidx.cardview.widget.CardView
                 android:layout_width="35dp"
